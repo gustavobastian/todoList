@@ -12,6 +12,23 @@ function component(){
     mainContent.className="projectCard";
     let snippetLocal2 = document.createTextNode("ToDo List");    
     mainContent.appendChild(snippetLocal2);
+    
+    let buttons = document.createElement('div'); 
+    buttons.className="projectButtons";
+    let buttonRemoveProject= document.createElement('div'); 
+    buttonRemoveProject.className="buttonRemoveProject";
+    let textButtonRemove = document.createTextNode("remove");    
+    buttonRemoveProject.appendChild(textButtonRemove);
+    buttons.appendChild(buttonRemoveProject);
+
+
+    let buttonViewProject= document.createElement('div'); 
+    buttonViewProject.className="buttonRemoveProject";
+    let text = document.createTextNode("view");    
+    buttonViewProject.appendChild(text);
+    buttons.appendChild(buttonViewProject);
+
+    mainContent.appendChild(buttons);
     contentElement.appendChild(mainContent);
 
     let mainContent2= document.createElement('div'); 
