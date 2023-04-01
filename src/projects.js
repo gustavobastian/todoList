@@ -1,48 +1,31 @@
-//generating projects navigation bar
-function component(){
-    let contentElement=document.getElementById('projectsColumn') ;
-    contentElement.className="projectsColClass";
-    let title= document.createElement('div'); 
-    title.className="titleName"
-    let snippetLocal = document.createTextNode("Projects");
-    title.appendChild(snippetLocal);
-    contentElement.appendChild(title);
-    //dinamic content    
-    let mainContent= document.createElement('div'); 
-    mainContent.className="projectCard";
-    let snippetLocal2 = document.createTextNode("ToDo List");    
-    mainContent.appendChild(snippetLocal2);
+//let moduleTask=require('./tasks.js')
+
+const projects = function (Title,Description) {
+    let title=Title;
+    let description=Description;
+    let TasksList = [];
     
-    let buttons = document.createElement('div'); 
-    buttons.className="projectButtons";
-    let buttonRemoveProject= document.createElement('div'); 
-    buttonRemoveProject.className="buttonRemoveProject";
-    let textButtonRemove = document.createTextNode("remove");    
-    buttonRemoveProject.appendChild(textButtonRemove);
-    buttons.appendChild(buttonRemoveProject);
+    async function addTask(task){
+        await this.TasksList.push(task);
+        console.log("here")
+        return;
+    }
+    
+    function findIndex(task){
+        for (let index=0;index<this.TasksList.size;index++)
+            if(task==TasksList[index])
+                {return index;}
+        
+        return -1;        
+    }
 
-
-    let buttonViewProject= document.createElement('div'); 
-    buttonViewProject.className="buttonRemoveProject";
-    let text = document.createTextNode("view");    
-    buttonViewProject.appendChild(text);
-    buttons.appendChild(buttonViewProject);
-
-    mainContent.appendChild(buttons);
-    contentElement.appendChild(mainContent);
-
-    let mainContent2= document.createElement('div'); 
-    mainContent2.className="projectCard";
-    let snippetLocal3 = document.createTextNode("ToDo List");    
-    mainContent2.appendChild(snippetLocal3);
-    contentElement.appendChild(mainContent2);
-
-
-    let buttonAddProject= document.createElement('div'); 
-    buttonAddProject.className="buttonAddProject";
-    let textButton = document.createTextNode("New");    
-    buttonAddProject.appendChild(textButton);
-    contentElement.appendChild(buttonAddProject);
-    return ;
+    return {
+        title,
+        description,
+        TasksList,
+        addTask,
+        findIndex
+    }
 }
-module.exports={component}
+
+module.exports=projects;

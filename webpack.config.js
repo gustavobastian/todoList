@@ -2,21 +2,25 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-
 module.exports = {
   mode:'development', 
   entry: {
     index:{
       import:'./src/index.js',
-      dependOn: 'tasks', 'projects'
+      dependOn: 'tasks',
+      dependOn: 'projectsModule',      
+      dependOn: 'projects',      
       },
     tasks:{
         import:'./src/tasks.js',
         },
-        ,
+    projectsModule:{
+      import:'./src/projectsModule.js',
+      },
     projects:{
-        import:'./src/projects.js',
-        },
+      import:'./src/projects.js',
+      dependOn: 'tasks',      
+      },
   },
   plugins: [
     new HtmlWebpackPlugin({

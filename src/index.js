@@ -1,8 +1,29 @@
 import './style.css';
-let task = require('./tasks')
-let projects = require('./projects')
+//import task from './tasks';
+let taskMod = require('./tasks')
+let projects = require('./projectsModule')
+let projectsList = require('./projects')
 
 
+async function All(){
+
+let list= projectsList();
+
+
+let task= await taskMod();
+task.title="one";
+console.log(task)
+let task2= await taskMod();
+task2.title="two";
+
+await list.addTask(task);
+console.log("1")
+await console.log(JSON.stringify(list))
+await list.addTask(task2);
+console.log("2")
+await console.log(JSON.stringify(list))
+}
+All();
 function component(){
     let contentElement=document.createElement('div') 
     let navBar= document.createElement('div'); 
