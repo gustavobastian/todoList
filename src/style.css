@@ -101,7 +101,7 @@ body{
 .buttonRemoveProject{
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 33%;
     height: 20px;
     border-radius: 5px;
     background: rgb(243, 228, 143);

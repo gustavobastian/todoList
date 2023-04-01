@@ -1,8 +1,10 @@
 import './style.css';
+
 //import task from './tasks';
 let taskMod = require('./tasks')
 let projects = require('./projectsModule')
-let projectsList = require('./projects')
+let projectsLocal = require('./projects')
+
 
 
 function component(){
@@ -54,7 +56,7 @@ document.body.appendChild(component());
  */
 
 async function All(){
-    let list= projectsList();
+    let list= projectsLocal();
     list.title="Project 1";
     list.description="A lot to do";
     let task= await taskMod();
@@ -70,7 +72,7 @@ async function All(){
  * generating project list 2
  */
 async function All2(){
-    let list= projectsList();
+    let list= projectsLocal();
     list.title="Project 2";
     list.description="few things to do";
     let task= await taskMod();
