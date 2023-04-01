@@ -1,4 +1,6 @@
 import './style.css';
+let task = require('./tasks')
+
 
 function component(){
     let contentElement=document.createElement('div') 

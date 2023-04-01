@@ -2,13 +2,17 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
+
 module.exports = {
   mode:'development', 
   entry: {
     index:{
       import:'./src/index.js',
-      }
-      ,
+      dependOn: 'tasks'
+      },
+    tasks:{
+        import:'./src/tasks.js',
+        },
   },
   plugins: [
     new HtmlWebpackPlugin({
