@@ -8,10 +8,14 @@ module.exports = {
   entry: {
     index:{
       import:'./src/index.js',
-      dependOn: 'tasks'
+      dependOn: 'tasks', 'projects'
       },
     tasks:{
         import:'./src/tasks.js',
+        },
+        ,
+    projects:{
+        import:'./src/projects.js',
         },
   },
   plugins: [
