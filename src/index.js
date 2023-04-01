@@ -5,25 +5,6 @@ let projects = require('./projectsModule')
 let projectsList = require('./projects')
 
 
-async function All(){
-
-let list= projectsList();
-
-
-let task= await taskMod();
-task.title="one";
-console.log(task)
-let task2= await taskMod();
-task2.title="two";
-
-await list.addTask(task);
-console.log("1")
-await console.log(JSON.stringify(list))
-await list.addTask(task2);
-console.log("2")
-await console.log(JSON.stringify(list))
-}
-All();
 function component(){
     let contentElement=document.createElement('div') 
     let navBar= document.createElement('div'); 
@@ -62,4 +43,55 @@ function component(){
     return contentElement;
 }
 document.body.appendChild(component());
-projects.component();
+
+
+
+
+/*****generating some project to pass to project module */
+
+/**
+ * generating project list 1
+ */
+
+async function All(){
+    let list= projectsList();
+    list.title="Project 1";
+    list.description="A lot to do";
+    let task= await taskMod();
+    task.title="one";
+    let task2= await taskMod();
+    task2.title="two";
+    await list.addTask(task);
+    await list.addTask(task2);    
+    
+    return list;
+    }
+/**
+ * generating project list 2
+ */
+async function All2(){
+    let list= projectsList();
+    list.title="Project 2";
+    list.description="few things to do";
+    let task= await taskMod();
+    task.title="three";    
+    let task2= await taskMod();
+    task2.title="four";
+    await list.addTask(task);    
+    await list.addTask(task2);    
+    return list;
+    }
+
+
+
+async function sum(){
+let projectLocalList=[];
+let project1= await All();
+let project2= await All2();
+await projectLocalList.push(project1);
+await projectLocalList.push(project2);
+projects.component(projectLocalList);
+return projectLocalList;
+}
+
+let localist=sum();
