@@ -1,3 +1,5 @@
+let projectsLocal = require('./projects')
+let projectForm = require('./projectForm')
 const taskList=[];
 //generating projects navigation bar
 function component(taskList){
@@ -81,8 +83,7 @@ function component(taskList){
         let indentification=localId.split("_");
     
         if(indentification[0]=="buttonAddProject"){
-            addingNewProject();
-            return;
+            addingNewProject();            
         }
         else{
             if(indentification[0]=="buttonProjectRemove"){
@@ -117,6 +118,11 @@ function component(taskList){
 
     function addingNewProject(){
         console.log("adding new project")
+        projectForm.componentProject();
+        let newProject=projectsLocal();
+        newProject.title="hello world";
+        taskList.push(newProject);
+        component(taskList);
     }
     
     function viewProject(id){

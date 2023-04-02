@@ -8,7 +8,7 @@ module.exports = {
     index:{
       import:'./src/index.js',
       dependOn: 'tasks',
-      dependOn: 'projectsModule',      
+      dependOn:'projectsModule',
       dependOn: 'projects',      
       },
     tasks:{
@@ -16,11 +16,16 @@ module.exports = {
         },
     projectsModule:{
       import:'./src/projectsModule.js',
+      dependOn: 'projectsForm',  
       },
     projects:{
       import:'./src/projects.js',
       dependOn: 'tasks',      
       },
+    projectsForm:{
+      import:'./src/projectForm.js',
+      dependOn: 'tasks',      
+      },  
   },
   plugins: [
     new HtmlWebpackPlugin({

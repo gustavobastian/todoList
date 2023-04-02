@@ -1,6 +1,7 @@
 import './style.css';
+import PubSub from 'pubsub-js'
 
-//import task from './tasks';
+
 let taskMod = require('./tasks')
 let projects = require('./projectsModule')
 let projectsLocal = require('./projects')
@@ -20,13 +21,12 @@ function component(){
     mainContent.className="dinamicContent";
     let projects= document.createElement('div'); 
     projects.id="projectsColumn";
+    mainContent.appendChild(projects);
     
     
     let tasks= document.createElement('div'); 
     tasks.id="tasksColumn";
-    let snippetLocal3 = document.createTextNode("ToDo List222");    
-    tasks.appendChild(snippetLocal3);
-    mainContent.appendChild(projects);
+    
     mainContent.appendChild(tasks);
 
 
@@ -59,12 +59,12 @@ async function All(){
     let list= projectsLocal();
     list.title="Project 1";
     list.description="A lot to do";
-    let task= await taskMod();
+    let task=  taskMod();
     task.title="one";
-    let task2= await taskMod();
+    let task2= taskMod();
     task2.title="two";
-    await list.addTask(task);
-    await list.addTask(task2);    
+    list.addTask(task);
+    list.addTask(task2);    
     
     return list;
     }
@@ -75,12 +75,12 @@ async function All2(){
     let list= projectsLocal();
     list.title="Project 2";
     list.description="few things to do";
-    let task= await taskMod();
+    let task= taskMod();
     task.title="three";    
-    let task2= await taskMod();
+    let task2= taskMod();
     task2.title="four";
-    await list.addTask(task);    
-    await list.addTask(task2);    
+    list.addTask(task);    
+    list.addTask(task2);    
     return list;
     }
 
@@ -90,10 +90,22 @@ async function sum(){
 let projectLocalList=[];
 let project1= await All();
 let project2= await All2();
-await projectLocalList.push(project1);
-await projectLocalList.push(project2);
+projectLocalList.push(project1);
+projectLocalList.push(project2);
 projects.component(projectLocalList);
 return projectLocalList;
 }
 
 let localist=sum();
+/*
+
+// create a function to subscribe to topics
+let mySubscriber = function (msg, data) {
+    console.log( msg, data );
+};
+
+// add the function to the list of subscribers for a particular topic
+// we're keeping the returned token, in order to be able to unsubscribe
+// from the topic later on
+let token = PubSub.subscribe('MY TOPIC', mySubscriber);
+*/

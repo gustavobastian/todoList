@@ -1,4 +1,3 @@
-//let moduleTask=require('./tasks.js')
 
 const projects = function (Title,Description) {
     let title=Title;
@@ -7,8 +6,7 @@ const projects = function (Title,Description) {
     
     async function addTask(task){
         await this.TasksList.push(task);
-        console.log("here")
-        return;
+        console.log("here")        
     }
     
     function findIndex(task){
