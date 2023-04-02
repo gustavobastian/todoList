@@ -75,53 +75,59 @@ function component(taskList){
 
     let component4=document.getElementById("buttonAddProject_0");
     component4.addEventListener("click",buttonFun);
+
+    function buttonFun(x){
+        let localId=x.srcElement.id;
+        let indentification=localId.split("_");
+    
+        if(indentification[0]=="buttonAddProject"){
+            addingNewProject();
+            return;
+        }
+        else{
+            if(indentification[0]=="buttonProjectRemove"){
+                removeProject(indentification[1]);        }
+            else{
+                if(indentification[0]=="buttonProjectView"){
+                    viewProject(indentification[1]);
+                }
+                else{
+                    console.log("edit")
+                }
+            }
+        }
+    }
+    
+
+    async function removeProject(id){
+        console.log("removing project "+id)
+        let response=(confirm("are you shure?"));
+        if(response==true){
+            let newTasklist=[];
+            for(let index=0;index<taskList.length;index++){
+                if(id!=index){
+                    newTasklist.push(taskList[index]);
+                }
+            }
+            taskList=newTasklist;
+            component(taskList);
+        }
+        
+    }
+
+    function addingNewProject(){
+        console.log("adding new project")
+    }
+    
+    function viewProject(id){
+    
+        console.log("view project "+id)
+    }
+    
     
     return contentElement;
 }
 
-function buttonFun(x){
-    let localId=x.srcElement.id;
-    let indentification=localId.split("_");
 
-    if(indentification[0]=="buttonAddProject"){
-        addingNewProject();
-        return;
-    }
-    else{
-        if(indentification[0]=="buttonProjectRemove"){
-            removeProject(indentification[1]);        }
-        else{
-            if(indentification[0]=="buttonProjectView"){
-                viewProject(indentification[1]);
-            }
-            else{
-                console.log("edit")
-            }
-        }
-    }
-}
-
-function addingNewProject(){
-    console.log("adding new project")
-}
-async function removeProject(id){
-    console.log("removing project "+id)
-    let response=(confirm("are you shure?"));
-    if(response==true){
-        let newTasklist=[];
-        for(let index=0;index<taskList.length;index++){
-            if(id!=index){
-                newTasklist.push(taskList[i]);
-            }
-        }
-        taskList=newTasklist;
-        component(taskList);
-    }
-    
-}
-function viewProject(id){
-
-    console.log("view project "+id)
-}
 
 module.exports= {component,taskList};
