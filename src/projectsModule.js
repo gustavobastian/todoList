@@ -144,7 +144,7 @@ function component(serviceList){
     function viewProject(id){
     
         console.log("view project "+id)
-        tasksModule.componentTasks(taskList,1);
+        tasksModule.componentTasks(taskList,id);
 
     }
     

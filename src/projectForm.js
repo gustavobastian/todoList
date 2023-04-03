@@ -126,8 +126,13 @@ function componentProject(serviceList, mode, id){
                 serviceList.addProject(newProject);
             }
             else{
-                serviceList.listService[id].title= localTitle;  
-                serviceList.listService[id].description= localDescription;  
+                if(localTitle!=" "){
+                    serviceList.listService[id].title= localTitle;
+                }
+                if (localDescription!=" ") {
+                    serviceList.listService[id].description= localDescription;  
+                }    
+                
             }
             PubSub.publish('projectUpdates', 'NewProject!');
             return (serviceList)
