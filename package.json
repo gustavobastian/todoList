@@ -32,7 +32,9 @@
   },
   "dependencies": {
     "babel": "^6.23.0",
+    "babel-loader": "^9.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "pubsub": "^3.2.1",
     "pubsub-js": "^1.9.4"
   }
 }

@@ -1,11 +1,19 @@
+const PubSub = require('pubsub-js');
+
 let tasks= require('./tasks.js')
 let project=require('./projects.js')
 
+// create a function to subscribe to topics
+let mySubscriber = function (msg, data) {
+    console.log( msg, data );
+};
+
+
 const listService = function () {
     let listService=[];
-
+    PubSub.subscribe('projectUpdates', mySubscriber);
     function addProject(project){
-        this.listService.push(project);
+        this.listService.push(project);        
     }
 
     function removeProject(id){

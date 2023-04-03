@@ -29,6 +29,10 @@ module.exports = {
     listService:{
       import: './src/listService.js'
     }    
+    ,
+    taskModule:{
+      import: './src/taskModule.js'
+    }    
   },
   plugins: [
     new HtmlWebpackPlugin({

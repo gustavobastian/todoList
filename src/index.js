@@ -6,9 +6,9 @@ let projects = require('./projectsModule')
 let projectsLocal = require('./projects')
 let listProjectservice=require('./listService')
 
-
-
 function component(){
+    
+
     let contentElement=document.createElement('div') 
     let navBar= document.createElement('div'); 
     let snippetLocal = document.createTextNode("My Project Monitor");
@@ -73,27 +73,9 @@ async function All(){
     
     return list;
     }
-/**
- * generating project list 2
- */
-async function All2(){
-    let list= projectsLocal();
-    list.title="Project 2";
-    list.description="few things to do";
-    let task= taskMod();
-    task.title="three";    
-    let task2= taskMod();
-    task2.title="four";
-    list.addTask(task);    
-    list.addTask(task2);    
-    return list;
-    }
-
 async function GeneratingFirstListOfProjects(){
-    let project1= await All();
-    let project2= await All2();
-    localProjectList.addProject(project1);
-    localProjectList.addProject(project2);
+    let project1= await All();    
+    localProjectList.addProject(project1);    
     projects.component(localProjectList);
     return localProjectList;
 }

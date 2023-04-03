@@ -1,12 +1,18 @@
+
+
 let projectsLocal = require('./projects')
 let projectForm = require('./projectForm')
 let listProjectservice=require('./listService')
+let tasksModule=require('./tasksModule')
 let taskList=listProjectservice();
+const PubSub = require('pubsub-js');
+
 
 //generating projects navigation bar
 function component(serviceList){
     
     taskList=serviceList;    
+    
 
     //generating project columns elements
     let contentElement=document.getElementById('projectsColumn') ;
@@ -109,7 +115,8 @@ function component(serviceList){
             }
         }
     }
-    
+    //subscribing for refreshing after change
+    PubSub.subscribe('projectUpdates', refresh);
 
     async function removeProject(id){
         console.log("removing project "+id)
@@ -133,7 +140,12 @@ function component(serviceList){
     function viewProject(id){
     
         console.log("view project "+id)
+        tasksModule.componentTasks(taskList,1);
+
     }
+    
+
+    
     return contentElement;
 }
 
