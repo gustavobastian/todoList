@@ -101,8 +101,7 @@ function component(serviceList){
             addingNewProject();            
         }
         else{
-            if(indentification[0]=="buttonProjectRemove"){
-                console.log("here")
+            if(indentification[0]=="buttonProjectRemove"){                
                 removeProject(indentification[1]);        
             }
             else{
@@ -110,7 +109,7 @@ function component(serviceList){
                     viewProject(indentification[1]);
                 }
                 else{
-                    console.log("edit")
+                    editingProject(indentification[1]);
                 }
             }
         }
@@ -130,7 +129,12 @@ function component(serviceList){
 
     function addingNewProject(){
         console.log("adding new project");       
-        projectForm.componentProject(taskList);
+        projectForm.componentProject(taskList,0,0);//mode 0 adding new
+    }
+    
+    function editingProject(id){
+        console.log("editing project");       
+        projectForm.componentProject(taskList,1,id);//mode 0 adding new
     }
 
     function refresh(){            

@@ -7,7 +7,7 @@ let taskList=listProjectservice();
 const PubSub = require('pubsub-js');
 
 
-function componentTasks(serviceList,id){        
+function componentTasks(serviceList){        
 
     let localTitle=" ";
     let localDescription=" ";

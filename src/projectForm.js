@@ -4,7 +4,10 @@ let projectsLocal = require('./projects')
 
 
 
-function componentProject(serviceList){        
+function componentProject(serviceList, mode, id){        
+    console.log(serviceList)
+    console.log(mode)
+    console.log(id)
 
     let localTitle=" ";
     let localDescription=" ";
@@ -31,6 +34,10 @@ function componentProject(serviceList){
     let inputTitle2= document.createElement('input'); 
     inputTitle2.id="inputTitle";
     inputTitle2.className="inputForms";
+    console.log(serviceList.listService[1])
+    if(mode==1){
+        inputTitle2.value=serviceList.listService[id].title;
+    }
     formulary.appendChild(labelTitle);
     formulary.appendChild(inputTitle2);
 
@@ -46,6 +53,9 @@ function componentProject(serviceList){
     inputDescription.className="inputForms";
     inputDescription.rows="50";
     inputDescription.cols="auto";
+    if(mode==1){
+        inputDescription.value=serviceList.listService[id].description;
+    }
     formulary.appendChild(labelDescription);
     formulary.appendChild(inputDescription);
     
@@ -62,7 +72,12 @@ function componentProject(serviceList){
     buttonCancel.id="cancelProject";
     buttonCancel.innerHTML="CANCEL";
     let buttonOK=document.createElement('button'); 
-    buttonOK.innerHTML = "ADD";
+    if(mode==0){
+        buttonOK.innerHTML = "ADD";
+    }
+    else{
+        buttonOK.innerHTML = "UPDATE";
+    }
     buttonOK.id="okProject";
     buttonsForms.appendChild(buttonCancel);
     buttonsForms.appendChild(buttonOK);
@@ -104,10 +119,16 @@ function componentProject(serviceList){
         else{
             console.log("sending");
             contentElement.innerHTML=" ";
-            let newProject=projectsLocal();
-            newProject.title=localTitle;
-            newProject.description=localDescription;
-            serviceList.addProject(newProject);
+            if(mode==0){
+                let newProject=projectsLocal();
+                newProject.title=localTitle;
+                newProject.description=localDescription;
+                serviceList.addProject(newProject);
+            }
+            else{
+                serviceList.listService[id].title= localTitle;  
+                serviceList.listService[id].description= localDescription;  
+            }
             PubSub.publish('projectUpdates', 'NewProject!');
             return (serviceList)
             
