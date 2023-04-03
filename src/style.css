@@ -179,3 +179,17 @@ body{
     width: 100%;
     text-align: left;
 }
+.cardTask{
+    display:flex;
+    flex-direction: row;
+    width: 90%;
+    text-align: left;
+    background-color: rgb(139, 168, 96);
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 5px;
+    box-shadow: 0px 0px 15px 0px black;
+    border-radius: 5px;
+}

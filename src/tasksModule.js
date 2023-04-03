@@ -12,8 +12,7 @@ function componentTasks(serviceList,projectId){
 
     let localTitle;
     let localDescription;
-    console.log(serviceList)
-    console.log(projectId)
+    
     let contentElement=document.getElementById('tasksColumn') ;
     contentElement.innerHTML="";
     contentElement.className="projectsColClass";
@@ -40,9 +39,16 @@ function componentTasks(serviceList,projectId){
     allTasks.appendChild(description);
 
     
-
+    let index=0;
     serviceList.listService[projectId].TasksList.forEach(element => {
-        console.log(element)
+        console.log(element);
+        let cardTask= document.createElement('div');         
+        cardTask.className="cardTask"
+        cardTask.id="cardTask_"+index;
+        let snippetLocal4 = document.createTextNode("Task name: "+element.title);
+        cardTask.appendChild(snippetLocal4);    
+        allTasks.appendChild(cardTask);
+        index++;
     });
 
     contentElement.appendChild(allTasks);

@@ -8,7 +8,7 @@ module.exports = {
     index:{
       import:'./src/index.js',
       dependOn: 'listService',
-      dependOn:'projectsModule',
+      dependOn:'projectsModule',      
       dependOn: 'projects',      
       },
     tasks:{
@@ -27,11 +27,12 @@ module.exports = {
       dependOn: 'tasks',      
       },
     listService:{
-      import: './src/listService.js'
+      import: './src/listService.js',
+      dependOn: 'taskModule',      
     }    
     ,
     taskModule:{
-      import: './src/taskModule.js'
+      import: './src/tasksModule.js'
     }    
   },
   plugins: [
