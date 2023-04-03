@@ -7,6 +7,7 @@ let taskList=listProjectservice();
 const PubSub = require('pubsub-js');
 
 
+
 function componentTasks(serviceList,projectId){        
     
     let contentElement=document.getElementById('tasksColumn') ;
@@ -58,8 +59,16 @@ function componentTasks(serviceList,projectId){
         let ranking_task = document.createTextNode("Task Priority: "+element.priority);        
         cardTask_3.className="card_text"        
         cardTask_3.appendChild(ranking_task);        
-        cardTask.appendChild(cardTask_3);       
+        cardTask.appendChild(cardTask_3);   
         
+        let cardTask_4= document.createElement('div');  
+        let dueDate = document.createTextNode("Task dueDate: "+(element.dueDate).slice(0, 10));        
+        cardTask_4.className="card_text"        
+        cardTask_4.appendChild(dueDate);        
+        cardTask.appendChild(cardTask_4);   
+        
+        let buttonsTasks= document.createElement('div');  
+        buttonsTasks.className="buttonsTasks";
         //buttons
         let button_delete= document.createElement('div');          
         button_delete.id="buttonDelTask_"+index;        
@@ -71,10 +80,13 @@ function componentTasks(serviceList,projectId){
         button_edit.className="taskButton";
         let textEditButton = document.createTextNode("Edit");        
         button_edit.appendChild(textEditButton);   
-        cardTask.appendChild(button_delete);  
-        cardTask.appendChild(button_edit);  
+
+        buttonsTasks.appendChild(button_delete);  
+        buttonsTasks.appendChild(button_edit);  
 
         //checkdone
+        let checkdone= document.createElement('div');  
+        checkdone.className="checkdone";
         let labelCheckTitle= document.createElement('label');
         labelCheckTitle.className="labelsChecks";
         labelCheckTitle.HTMLfor="check";
@@ -84,8 +96,11 @@ function componentTasks(serviceList,projectId){
         let check = document.createElement("input")
         check.type="checkbox";
         check.id="taskCheck_"+index;
-        cardTask.appendChild(labelCheckTitle);  
-        cardTask.appendChild(check);  
+        checkdone.appendChild(labelCheckTitle);  
+        checkdone.appendChild(check);  
+        buttonsTasks.appendChild(checkdone);  
+
+        cardTask.appendChild(buttonsTasks);  
 
         allTasks.appendChild(cardTask);
         index++;

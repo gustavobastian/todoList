@@ -68,13 +68,13 @@ async function All(){
     let task=  taskMod();
     task.title="one";
     task.priority="high"
-    task.dueDate=Date.now();
+    task.dueDate= new Date().toISOString();
     task.description="Organize the notes."
 
     let task2= taskMod();
     task2.title="two";
     task2.priority="low";
-    task2.dueDate=Date.now();
+    task2.dueDate=new Date().toISOString();
     task2.description="Remove old tasks."
     list.addTask(task);
     list.addTask(task2);    

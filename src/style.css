@@ -181,6 +181,7 @@ body{
     background: rgb(139, 168, 96);
     margin-left: 5%;
     margin-right: 5%;    
+    font-weight: bold;
 }
 
 .cardTask{
@@ -203,12 +204,24 @@ body{
     color:blue;
     background:transparent;
     margin-bottom: 15px;
+    font-weight: bold;
 }
 .card_text{
     display:flex;
     font-size: medium;
     color:black;
     background:transparent;
+}
+.buttonsTasks{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: transparent;
+    align-items: center;
+    font-size: 20px;
+    justify-content: space-around;
+    text-align: center;
+
 }
 .taskButton{
     display:flex;
@@ -218,11 +231,17 @@ body{
     height: 25px;
     border-radius: 5px;
     margin:5px;
+    text-align: justify;    
 }
 .taskButton:hover{
     background: rgb(92, 86, 54);
 }
 .labelsChecks{
+    display:flex;
+    background: transparent;
+    color:black;
+}
+.checkdone{
     display:flex;
     background: transparent;
     color:black;
