@@ -52,6 +52,7 @@ body{
     font-weight: bold;
     background: transparent;
     color:rgb(248, 239, 113);
+    margin-top: 5px;
 }
 .projectCard{
     display: flex;
@@ -94,7 +95,7 @@ body{
     text-align: center;
     box-shadow: 0px 0px 15px 0px black;
 }
-.buttonAddProject:hover{
+.buttonAddProject:hover,.buttonRemoveProject:hover{
     background: rgb(92, 86, 54);
 }
 
@@ -110,9 +111,7 @@ body{
     margin-top:15px;
     text-align: center;
 }
-.buttonRemoveProject:hover{
-    background: rgb(92, 86, 54);
-}
+
 
 .formsFormulary{
     display:flex;
@@ -166,7 +165,7 @@ body{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 400px;
+    height: 100vh;
     background: gray;
     text-align: center;
     box-shadow: 0px 0px 15px 0px black;
@@ -176,20 +175,55 @@ body{
 .titleProjectName{
     display:flex;
     flex-direction: row;
-    width: 100%;
-    text-align: left;
-}
-.cardTask{
-    display:flex;
-    flex-direction: row;
     width: 90%;
     text-align: left;
-    background-color: rgb(139, 168, 96);
-    margin-top: 5px;
-    margin-bottom: 15px;
+    color:black;
+    background: rgb(139, 168, 96);
+    margin-left: 5%;
+    margin-right: 5%;    
+}
+
+.cardTask{
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    text-align: left;
+    background: rgb(139, 168, 96);
+    margin-top: 15px;
+    
     margin-left: 5%;
     margin-right: 5%;
     padding: 5px;
     box-shadow: 0px 0px 15px 0px black;
     border-radius: 5px;
+}
+.card_title{
+    display:flex;
+    font-size: medium;
+    color:blue;
+    background:transparent;
+    margin-bottom: 15px;
+}
+.card_text{
+    display:flex;
+    font-size: medium;
+    color:black;
+    background:transparent;
+}
+.taskButton{
+    display:flex;
+    width: 10%;
+    background: rgb(243, 228, 143);
+    color:black;
+    height: 25px;
+    border-radius: 5px;
+    margin:5px;
+}
+.taskButton:hover{
+    background: rgb(92, 86, 54);
+}
+.labelsChecks{
+    display:flex;
+    background: transparent;
+    color:black;
 }

@@ -15,6 +15,7 @@ function component(){
     navBar.appendChild(snippetLocal);
     navBar.className="header";
     contentElement.appendChild(navBar);
+    
     //dinamic content
     
     let mainContent= document.createElement('div'); 
@@ -63,11 +64,18 @@ let localProjectList=listProjectservice();
 async function All(){
     let list= projectsLocal();
     list.title="Project 1";
-    list.description="A lot to do";
+    list.description="A lot to do";    
     let task=  taskMod();
     task.title="one";
+    task.priority="high"
+    task.dueDate=Date.now();
+    task.description="Organize the notes."
+
     let task2= taskMod();
     task2.title="two";
+    task2.priority="low";
+    task2.dueDate=Date.now();
+    task2.description="Remove old tasks."
     list.addTask(task);
     list.addTask(task2);    
     

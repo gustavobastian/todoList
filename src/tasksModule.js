@@ -8,10 +8,6 @@ const PubSub = require('pubsub-js');
 
 
 function componentTasks(serviceList,projectId){        
-
-
-    let localTitle;
-    let localDescription;
     
     let contentElement=document.getElementById('tasksColumn') ;
     contentElement.innerHTML="";
@@ -45,8 +41,52 @@ function componentTasks(serviceList,projectId){
         let cardTask= document.createElement('div');         
         cardTask.className="cardTask"
         cardTask.id="cardTask_"+index;
-        let snippetLocal4 = document.createTextNode("Task name: "+element.title);
-        cardTask.appendChild(snippetLocal4);    
+        
+        let cardTask_1= document.createElement('div');  
+        let title_task = document.createTextNode("Task name: "+element.title);
+        cardTask_1.className="card_title"
+        cardTask_1.appendChild(title_task);    
+        cardTask.appendChild(cardTask_1);    
+
+        let cardTask_2= document.createElement('div');  
+        let text_task = document.createTextNode("Task description: "+element.description);        
+        cardTask_2.appendChild(text_task);   
+        cardTask_2.className="card_text"
+        cardTask.appendChild(cardTask_2);    
+        
+        let cardTask_3= document.createElement('div');  
+        let ranking_task = document.createTextNode("Task Priority: "+element.priority);        
+        cardTask_3.className="card_text"        
+        cardTask_3.appendChild(ranking_task);        
+        cardTask.appendChild(cardTask_3);       
+        
+        //buttons
+        let button_delete= document.createElement('div');          
+        button_delete.id="buttonDelTask_"+index;        
+        button_delete.className="taskButton";
+        let textDelButton = document.createTextNode("Delete");        
+        button_delete.appendChild(textDelButton);   
+        let button_edit= document.createElement('div');  
+        button_edit.id="buttonEditTask_"+index;
+        button_edit.className="taskButton";
+        let textEditButton = document.createTextNode("Edit");        
+        button_edit.appendChild(textEditButton);   
+        cardTask.appendChild(button_delete);  
+        cardTask.appendChild(button_edit);  
+
+        //checkdone
+        let labelCheckTitle= document.createElement('label');
+        labelCheckTitle.className="labelsChecks";
+        labelCheckTitle.HTMLfor="check";
+        labelCheckTitle.id="labelCheck_"+index;
+        labelCheckTitle.innerText="Done:";
+    
+        let check = document.createElement("input")
+        check.type="checkbox";
+        check.id="taskCheck_"+index;
+        cardTask.appendChild(labelCheckTitle);  
+        cardTask.appendChild(check);  
+
         allTasks.appendChild(cardTask);
         index++;
     });
