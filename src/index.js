@@ -1,10 +1,10 @@
 import './style.css';
-import PubSub from 'pubsub-js'
 
 
 let taskMod = require('./tasks')
 let projects = require('./projectsModule')
 let projectsLocal = require('./projects')
+let listProjectservice=require('./listService')
 
 
 
@@ -46,10 +46,15 @@ function component(){
 }
 document.body.appendChild(component());
 
+//global list of projects
+let localProjectList=listProjectservice();
 
 
 
 /*****generating some project to pass to project module */
+
+
+
 
 /**
  * generating project list 1
@@ -84,28 +89,13 @@ async function All2(){
     return list;
     }
 
-
-
-async function sum(){
-let projectLocalList=[];
-let project1= await All();
-let project2= await All2();
-projectLocalList.push(project1);
-projectLocalList.push(project2);
-projects.component(projectLocalList);
-return projectLocalList;
+async function GeneratingFirstListOfProjects(){
+    let project1= await All();
+    let project2= await All2();
+    localProjectList.addProject(project1);
+    localProjectList.addProject(project2);
+    projects.component(localProjectList);
+    return localProjectList;
 }
 
-let localist=sum();
-/*
-
-// create a function to subscribe to topics
-let mySubscriber = function (msg, data) {
-    console.log( msg, data );
-};
-
-// add the function to the list of subscribers for a particular topic
-// we're keeping the returned token, in order to be able to unsubscribe
-// from the topic later on
-let token = PubSub.subscribe('MY TOPIC', mySubscriber);
-*/
+let localist=GeneratingFirstListOfProjects();

@@ -1,6 +1,10 @@
+let listProjectservice=require('./listService')
+let taskListService=listProjectservice();
+let projectsLocal = require('./projects')
 
-function componentProject(taskList){
-    
+
+function componentProject(serviceList){        
+
     let contentElement=document.getElementById('tasksColumn') ;
     contentElement.innerHTML="";
     contentElement.className="projectsColClass";
@@ -77,9 +81,16 @@ function componentProject(taskList){
 
         if(x.srcElement.id=="cancelProject"){
             contentElement.innerHTML=" ";
+            return (serviceList)
         }
         else{
+            console.log("sending");
             contentElement.innerHTML=" ";
+            let newProject=projectsLocal();
+            newProject.title="hello world";
+            serviceList.addProject(newProject);
+            return (serviceList)
+            
         }
     }
 

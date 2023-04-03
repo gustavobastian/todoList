@@ -7,7 +7,7 @@ module.exports = {
   entry: {
     index:{
       import:'./src/index.js',
-      dependOn: 'tasks',
+      dependOn: 'listService',
       dependOn:'projectsModule',
       dependOn: 'projects',      
       },
@@ -25,7 +25,10 @@ module.exports = {
     projectsForm:{
       import:'./src/projectForm.js',
       dependOn: 'tasks',      
-      },  
+      },
+    listService:{
+      import: './src/listService.js'
+    }    
   },
   plugins: [
     new HtmlWebpackPlugin({

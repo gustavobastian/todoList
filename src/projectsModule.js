@@ -1,9 +1,14 @@
 let projectsLocal = require('./projects')
 let projectForm = require('./projectForm')
-const taskList=[];
+let listProjectservice=require('./listService')
+let taskList=listProjectservice();
+
 //generating projects navigation bar
-function component(taskList){
+function component(serviceList){
     
+    taskList=serviceList;    
+
+    //generating project columns elements
     let contentElement=document.getElementById('projectsColumn') ;
     contentElement.innerHTML="";
     contentElement.className="projectsColClass";
@@ -12,9 +17,12 @@ function component(taskList){
     let snippetLocal = document.createTextNode("Projects");
     title.appendChild(snippetLocal);
     contentElement.appendChild(title);
+    
     //dinamic content    
     let localIndex=0;
-    taskList.forEach(element => {
+
+    //generating each project card
+    taskList.listService.forEach(element => {
         console.log(JSON.stringify(element))
 
         let mainContent= document.createElement('div'); 
@@ -56,16 +64,16 @@ function component(taskList){
         localIndex++;
     });
 
-    
-    
+    //"New" button    
     let buttonAddProject= document.createElement('div'); 
     buttonAddProject.className="buttonAddProject";
     let textButton = document.createTextNode("New");    
     buttonAddProject.id="buttonAddProject_"+0;
     buttonAddProject.appendChild(textButton);
     contentElement.appendChild(buttonAddProject);
+
     //adding event listeners for buttons
-    for (let d=0;d<(taskList.length);d++)
+    for (let d=0;d<(taskList.listService.length);d++)
     {
         let component1=document.getElementById("buttonProjectView_"+d);
         let component2=document.getElementById("buttonProjectRemove_"+d);
@@ -79,6 +87,7 @@ function component(taskList){
     component4.addEventListener("click",buttonFun);
 
     function buttonFun(x){
+        console.log("clicked")
         let localId=x.srcElement.id;
         let indentification=localId.split("_");
     
@@ -87,7 +96,9 @@ function component(taskList){
         }
         else{
             if(indentification[0]=="buttonProjectRemove"){
-                removeProject(indentification[1]);        }
+                console.log("here")
+                removeProject(indentification[1]);        
+            }
             else{
                 if(indentification[0]=="buttonProjectView"){
                     viewProject(indentification[1]);
@@ -103,25 +114,19 @@ function component(taskList){
     async function removeProject(id){
         console.log("removing project "+id)
         let response=(confirm("are you shure?"));
-        if(response==true){
-            let newTasklist=[];
-            for(let index=0;index<taskList.length;index++){
-                if(id!=index){
-                    newTasklist.push(taskList[index]);
-                }
-            }
-            taskList=newTasklist;
+        if(response===true){
+            taskList.removeProject(id);            
             component(taskList);
         }
         
     }
 
     function addingNewProject(){
-        console.log("adding new project")
-        projectForm.componentProject();
-        let newProject=projectsLocal();
-        newProject.title="hello world";
-        taskList.push(newProject);
+        console.log("adding new project");       
+        projectForm.componentProject(taskList);
+    }
+
+    function refresh(){            
         component(taskList);
     }
     
@@ -129,8 +134,6 @@ function component(taskList){
     
         console.log("view project "+id)
     }
-    
-    
     return contentElement;
 }
 
