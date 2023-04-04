@@ -6,6 +6,7 @@ let listProjectservice=require('./listService')
 let taskList=listProjectservice();
 const PubSub = require('pubsub-js');
 const listService = require('./listService');
+let taskForm = require('./taskForm')
 
 
 
@@ -17,8 +18,15 @@ function componentTasks(serviceList,projectId){
     contentElement.innerHTML="";
     contentElement.className="projectsColClass";
 
+    
+
     let allTasks=document.createElement('div'); 
     allTasks.className="allTasks";
+
+    let taskForms=document.createElement('div'); 
+    taskForms.className="taskForm";
+    taskForms.id="taskForm";
+    allTasks.appendChild(taskForms);
 
     let title= document.createElement('div'); 
     title.className="titleName"
@@ -145,6 +153,7 @@ function componentTasks(serviceList,projectId){
     let newTasksButton=document.getElementById("buttonNewTask");
     newTasksButton.addEventListener("click",function(){
         console.log("new tasks")
+        taskForm.componentTaskForm(serviceList,projectId);
     });
     let clearButton=document.getElementById("clearDone");
     clearButton.addEventListener("click",function(){
@@ -166,7 +175,7 @@ function componentTasks(serviceList,projectId){
             let response=(confirm("are you shure?"));
             if(response===true){
                 serviceList.listService[projectId].removeTask(index2);                     
-                componentTasks(serviceList,projectId);    
+                refreshTasks();
             }
 
 
@@ -185,6 +194,11 @@ function componentTasks(serviceList,projectId){
         });
         
     }
+
+   
+    function refreshTasks(){                    
+        componentTasks(serviceList,projectId)
+    } 
     
     
 }

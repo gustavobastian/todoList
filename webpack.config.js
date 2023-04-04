@@ -33,7 +33,11 @@ module.exports = {
     ,
     taskModule:{
       import: './src/tasksModule.js'
-    }    
+    },
+    taskForm:{
+      import: './src/taskForm.js'
+    }        
+
   },
   plugins: [
     new HtmlWebpackPlugin({

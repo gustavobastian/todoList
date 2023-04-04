@@ -149,7 +149,7 @@ body{
     
 }
 
-#okProject, #cancelProject{
+#okProject, #cancelProject,#cancelTask,#okTask{
     background: gold;
     color:black;
     border-radius:15px;
@@ -275,5 +275,44 @@ body{
     padding-right:  25%;
     margin-top: 15px;
     justify-content: space-around;
+    background: transparent;
+}
+
+.formsTask{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    background: gray;
+    width: 1000px;
+    font-size: 28px;
+    color: black;
+    border-style: solid;
+    border-width: 2px;
+    padding-top:10px;
+    padding-bottom:10px;
+
+}
+.titleTaskName{
+    display: flex;
+    background: gray;
+    color: black;
+}
+
+.labelsTaskForms{
+    display:flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.taskButtons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    background-color: transparent;
+    justify-content: space-around;
+}
+.inputTaskDueDate{ 
     background: transparent;
 }
