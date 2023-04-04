@@ -17,7 +17,6 @@ function componentTasks(serviceList,projectId){
     let contentElement=document.getElementById('tasksColumn') ;
     contentElement.innerHTML="";
     contentElement.className="projectsColClass";
-
     
 
     let allTasks=document.createElement('div'); 
@@ -194,7 +193,8 @@ function componentTasks(serviceList,projectId){
         });
         
     }
-
+    //subscribing for refreshing after change
+    PubSub.subscribe('taskUpdate', refreshTasks);
    
     function refreshTasks(){                    
         componentTasks(serviceList,projectId)

@@ -38,7 +38,7 @@ function component(){
 
     let footerContent=document.createElement('div');
     footerContent.className="textFooter";
-    let snippetFooter = document.createTextNode("By Gustavo Bastian (2023)");       
+    let snippetFooter = document.createTextNode("By Gustavo Bastian (2023)");               
     footerContent.appendChild(snippetFooter);
     contentElement.appendChild(footerContent);
 

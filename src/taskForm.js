@@ -5,9 +5,8 @@ let taskMod = require('./tasks')
 
 
 function componentTaskForm(serviceList,projectId){        
-    
-    let localTitle;
-    let localDescription;
+
+    let localtask=taskMod();
 
     let contentElement=document.getElementById('taskForm') ;
     let formularyTask=document.createElement('div'); 
@@ -105,23 +104,27 @@ function componentTaskForm(serviceList,projectId){
 
     function textChange(x){
         console.log(x);
-        if(x.srcElement.id=="inputTaskTitle")
-        {
-            localTitle=x.srcElement.value;
+        if(x.srcElement.id=="inputTaskTitle"){            
+            localtask.title=x.srcElement.value;
         }
         else{
-            localDescription=x.srcElement.value;
+            if(x.srcElement.id=="inputTaskDescription"){                
+                localtask.description=x.srcElement.value;
+                }
+            else{
+                localtask.dueDate= x.srcElement.value;
+            }    
         }
     }
 
 
     function buttonFunctionTask(x){
         console.log(x.srcElement.id);
-        let localtask=taskMod();
-        localtask.title="seven";
+        
+        
         localtask.priority="high"
-        localtask.dueDate= new Date().toISOString();
-        localtask.description="Organize the notes."
+        
+        
         localtask.checklist=false;
 
         if(x.srcElement.id=="cancelTask"){
@@ -134,7 +137,7 @@ function componentTaskForm(serviceList,projectId){
             serviceList.listService[projectId].addTask(localtask);
             let contentElementLocal=document.getElementById('taskForm');
             contentElementLocal.innerHTML=" ";
-            
+            PubSub.publish('taskUpdate', 'NewTask!');
         }
     } 
 }

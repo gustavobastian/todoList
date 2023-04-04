@@ -29,10 +29,13 @@ body{
 }
 .textFooter{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
-    text-align: center;
+    align-items:flex-start;
+    text-align: left;
     margin-top: auto;    
+    padding-left: 0;
+    margin-left: 0;
     background:  rgb(244, 248, 225);
     color: rgb(20, 22, 21);
 }
