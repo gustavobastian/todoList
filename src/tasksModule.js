@@ -5,6 +5,7 @@ let projectForm = require('./projectForm')
 let listProjectservice=require('./listService')
 let taskList=listProjectservice();
 const PubSub = require('pubsub-js');
+const listService = require('./listService');
 
 
 
@@ -134,6 +135,39 @@ function componentTasks(serviceList,projectId){
 
 
     contentElement.appendChild(allTasks);
+
+
+
+    ///adding listeners
+
+    //new and clear buttons
+    let newTasksButton=document.getElementById("buttonNewTask");
+    newTasksButton.addEventListener("click",function(){
+        console.log("new tasks")
+    });
+    let clearButton=document.getElementById("clearDone");
+    clearButton.addEventListener("click",function(){
+        console.log("clearDone")
+    });
+    
+    for (let index2=0;index2<index;index2++)
+    {
+        let deleteButton=document.getElementById("buttonDelTask_"+index2)
+        deleteButton.addEventListener("click",function(){            
+            console.log("delete:" + index2)
+        });
+        
+        let editButton=document.getElementById("buttonEditTask_"+index2)
+        editButton.addEventListener("click",function(){            
+            console.log("edit:" + index2)
+        });
+
+        let checkTick=document.getElementById("taskCheck_"+index2)
+        checkTick.addEventListener("change",function(){            
+            console.log("checked:" + index2)
+        });
+        
+    }
     
 }
 
