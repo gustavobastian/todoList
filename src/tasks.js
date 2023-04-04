@@ -16,6 +16,9 @@ const task = function (Title,Description,DueDate,Priority,Note) {
     const unSetCheckList=function (){
         this.checklist=false;
     }
+    const getCheckList=function (){
+        return  this.checklist;
+    }
 
     return {
         title,
@@ -26,7 +29,8 @@ const task = function (Title,Description,DueDate,Priority,Note) {
         checklist,
         writeNote,
         setCheckList,
-        unSetCheckList
+        unSetCheckList,
+        getCheckList
     }
 }
 

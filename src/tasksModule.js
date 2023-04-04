@@ -10,6 +10,8 @@ const listService = require('./listService');
 
 
 function componentTasks(serviceList,projectId){        
+
+    console.log(serviceList.listService[projectId])
     
     let contentElement=document.getElementById('tasksColumn') ;
     contentElement.innerHTML="";
@@ -58,8 +60,7 @@ function componentTasks(serviceList,projectId){
 
     allTasks.appendChild(topButtonsTasks);
 
-    serviceList.listService[projectId].TasksList.forEach(element => {
-        console.log(element);
+    serviceList.listService[projectId].TasksList.forEach(element => {        
         let cardTask= document.createElement('div');         
         cardTask.className="cardTask"
         cardTask.id="cardTask_"+index;
@@ -148,13 +149,18 @@ function componentTasks(serviceList,projectId){
     let clearButton=document.getElementById("clearDone");
     clearButton.addEventListener("click",function(){
         console.log("clearDone")
+        serviceList.listService[projectId].removeDone();
+        componentTasks(serviceList,projectId);    
     });
     
     for (let index2=0;index2<index;index2++)
     {
         let deleteButton=document.getElementById("buttonDelTask_"+index2)
-        deleteButton.addEventListener("click",function(){            
-            console.log("delete:" + index2)
+        deleteButton.addEventListener("click",function(){   
+            console.log(serviceList.listService[projectId]);
+            serviceList.listService[projectId].removeTask(index2);                     
+            componentTasks(serviceList,projectId);    
+
         });
         
         let editButton=document.getElementById("buttonEditTask_"+index2)
@@ -165,10 +171,14 @@ function componentTasks(serviceList,projectId){
         let checkTick=document.getElementById("taskCheck_"+index2)
         checkTick.addEventListener("change",function(){            
             console.log("checked:" + index2)
+            serviceList.listService[projectId].taskDone(index2);
         });
         
     }
     
+    
 }
+
+
 
 module.exports= {componentTasks};

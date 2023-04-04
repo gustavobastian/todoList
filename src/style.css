@@ -273,6 +273,7 @@ body{
     width: 100%;
     padding-left: 25%;
     padding-right:  25%;
+    margin-top: 15px;
     justify-content: space-around;
     background: transparent;
 }
