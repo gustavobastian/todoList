@@ -152,7 +152,7 @@ function componentTasks(serviceList,projectId){
     let newTasksButton=document.getElementById("buttonNewTask");
     newTasksButton.addEventListener("click",function(){
         console.log("new tasks")
-        taskForm.componentTaskForm(serviceList,projectId);
+        taskForm.componentTaskForm(serviceList,projectId,0,0);
     });
     let clearButton=document.getElementById("clearDone");
     clearButton.addEventListener("click",function(){
@@ -184,6 +184,7 @@ function componentTasks(serviceList,projectId){
         let editButton=document.getElementById("buttonEditTask_"+index2)
         editButton.addEventListener("click",function(){            
             console.log("edit:" + index2)
+            taskForm.componentTaskForm(serviceList,projectId,1,index2);
         });
 
         let checkTick=document.getElementById("taskCheck_"+index2)

@@ -17,6 +17,10 @@ const projects = function (Title,Description) {
         return -1;        
     }
 
+    function getTask(taskId){        
+        return TasksList[taskId];
+    }
+
     function taskDone(id){
         if(this.TasksList[id].getCheckList()==false){
             this.TasksList[id].setCheckList();
@@ -34,10 +38,14 @@ const projects = function (Title,Description) {
                 newTask.push(this.TasksList[index])                
             }
         }
-        
         this.TasksList=newTask;    
-        console.log(this.TasksList);               
     }
+
+
+    function updateTask(id,newTask){
+        this.TasksList[id]=newTask;                
+    }
+
 
     function removeDone(){
         let newTask=[];
@@ -58,8 +66,10 @@ const projects = function (Title,Description) {
         TasksList,
         addTask,
         findIndex,
+        getTask,
         removeTask,
         removeDone,
+        updateTask,
         taskDone
     }
 }

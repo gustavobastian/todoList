@@ -4,9 +4,15 @@ let projectsLocal = require('./projects')
 let taskMod = require('./tasks')
 
 
-function componentTaskForm(serviceList,projectId){        
-
-    let localtask=taskMod();
+function componentTaskForm(serviceList,projectId,mode,taskId){        
+    let localtask;
+    if(mode==0){
+        localtask=taskMod();
+    }
+    else{
+        localtask=serviceList.listService[projectId].getTask(taskId);
+    }
+    
 
     let contentElement=document.getElementById('taskForm') ;
     let formularyTask=document.createElement('div'); 
@@ -26,10 +32,9 @@ function componentTaskForm(serviceList,projectId){
     let inputTaskTitle2= document.createElement('input'); 
     inputTaskTitle2.id="inputTaskTitle";
     inputTaskTitle2.className="inputForms";
-    /*console.log(serviceList.listService[1])*/
-    /*if(mode==1){
-        inputTitle2.value=serviceList.listService[id].title;
-    }*/
+    if(mode==1){//if editing default value
+        inputTaskTitle2.value=localtask.title;
+    }
     formularyTask.appendChild(labelTaskTitle);
     formularyTask.appendChild(inputTaskTitle2);
 
@@ -44,9 +49,9 @@ function componentTaskForm(serviceList,projectId){
     inputTaskDescription.className="inputForms";
     inputTaskDescription.rows="10";
     inputTaskDescription.cols="auto";
-   /* if(mode==1){
-        inputDescription.value=serviceList.listService[id].description;
-    }*/
+    if(mode==1){
+        inputTaskDescription.value=localtask.description;
+    }
     formularyTask.appendChild(labelTaskDescription);
     formularyTask.appendChild(inputTaskDescription);
 
@@ -59,9 +64,46 @@ function componentTaskForm(serviceList,projectId){
     let inputTaskDueDate= document.createElement('input'); 
     inputTaskDueDate.id="inputTaskDueDate";
     inputTaskDueDate.type="date";
-    
+    if(mode==1){
+        inputTaskDueDate.value=localtask.dueDate;
+    }
     formularyTask.appendChild(labelTaskDueDate);
     formularyTask.appendChild(inputTaskDueDate);
+
+    let labelTaskPriority= document.createElement('label');
+    labelTaskPriority.className="labelsForms";
+    labelTaskPriority.HTMLfor="inputTaskPriority";
+    labelTaskPriority.id="labelTaskPriority";
+    labelTaskPriority.innerText="Priority:";
+
+    let inputTaskPriority= document.createElement('select'); 
+    inputTaskPriority.id="inputTaskPriority";    
+    let priorityLow = document.createElement('option'); 
+    priorityLow.value="low";
+    priorityLow.text="low";
+    let priorityMedium = document.createElement('option'); 
+    priorityMedium.value="medium";
+    priorityMedium.text="medium";
+    let priorityHigh = document.createElement('option'); 
+    priorityHigh.value="high";
+    priorityHigh.text="high";
+    
+    if(mode==1){
+        inputTaskPriority.value=localtask.priority;
+    }
+
+
+    inputTaskPriority.appendChild(priorityLow);
+    inputTaskPriority.appendChild(priorityMedium);
+    inputTaskPriority.appendChild(priorityHigh);
+    
+    formularyTask.appendChild(labelTaskPriority);
+    formularyTask.appendChild(inputTaskPriority);
+
+
+
+
+
 
     let buttonsForms=document.createElement('div'); 
     let buttonCancel=document.createElement('button'); 
@@ -101,32 +143,29 @@ function componentTaskForm(serviceList,projectId){
     inputTaskTitleId.addEventListener("change",textChange);
     inputTaskDescriptionId.addEventListener("change",textChange);
     inputTaskDueDate.addEventListener("change",textChange);
+    inputTaskPriority.addEventListener("change",textChange);
 
     function textChange(x){
         console.log(x);
         if(x.srcElement.id=="inputTaskTitle"){            
             localtask.title=x.srcElement.value;
         }
-        else{
-            if(x.srcElement.id=="inputTaskDescription"){                
+        if(x.srcElement.id=="inputTaskDescription"){                
                 localtask.description=x.srcElement.value;
                 }
-            else{
+        if(x.srcElement.id=="inputTaskDueDate"){                
                 localtask.dueDate= x.srcElement.value;
             }    
-        }
+        if(x.srcElement.id=="inputTaskPriority"){   
+            console.log(x.srcElement.value)             ;
+            localtask.priority= x.srcElement.value;
+        }        
+        
     }
 
 
     function buttonFunctionTask(x){
-        console.log(x.srcElement.id);
-        
-        
-        localtask.priority="high"
-        
-        
         localtask.checklist=false;
-
         if(x.srcElement.id=="cancelTask"){
             contentElement.innerHTML=" ";                        
             return 
@@ -134,7 +173,12 @@ function componentTaskForm(serviceList,projectId){
         else{
             console.log("sending");   
 
-            serviceList.listService[projectId].addTask(localtask);
+            if(mode==1){                
+                serviceList.listService[projectId].updateTask(taskId,localtask)
+            }
+            else{
+                serviceList.listService[projectId].addTask(localtask);
+            }            
             let contentElementLocal=document.getElementById('taskForm');
             contentElementLocal.innerHTML=" ";
             PubSub.publish('taskUpdate', 'NewTask!');
