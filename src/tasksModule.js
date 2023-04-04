@@ -149,8 +149,12 @@ function componentTasks(serviceList,projectId){
     let clearButton=document.getElementById("clearDone");
     clearButton.addEventListener("click",function(){
         console.log("clearDone")
-        serviceList.listService[projectId].removeDone();
-        componentTasks(serviceList,projectId);    
+
+        let response=(confirm("are you shure?"));
+        if(response===true){
+            serviceList.listService[projectId].removeDone();
+            componentTasks(serviceList,projectId);    
+        }
     });
     
     for (let index2=0;index2<index;index2++)
@@ -158,8 +162,14 @@ function componentTasks(serviceList,projectId){
         let deleteButton=document.getElementById("buttonDelTask_"+index2)
         deleteButton.addEventListener("click",function(){   
             console.log(serviceList.listService[projectId]);
-            serviceList.listService[projectId].removeTask(index2);                     
-            componentTasks(serviceList,projectId);    
+
+            let response=(confirm("are you shure?"));
+            if(response===true){
+                serviceList.listService[projectId].removeTask(index2);                     
+                componentTasks(serviceList,projectId);    
+            }
+
+
 
         });
         
