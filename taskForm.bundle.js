@@ -6,7 +6,8 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-(self["webpackChunktodolist"] = self["webpackChunktodolist"] || []).push([["projectsForm"],{
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/pubsub-js/src/pubsub.js":
 /*!**********************************************!*\
@@ -28,20 +29,81 @@ eval("const PubSub = __webpack_require__(/*! pubsub-js */ \"./node_modules/pubsu
 
 /***/ }),
 
-/***/ "./src/projectForm.js":
-/*!****************************!*\
-  !*** ./src/projectForm.js ***!
-  \****************************/
+/***/ "./src/projects.js":
+/*!*************************!*\
+  !*** ./src/projects.js ***!
+  \*************************/
+/***/ ((module) => {
+
+eval("\nconst projectLocal = function () {\n    let title;\n    let description;\n    let TasksList = [];\n    async function addTask(task){\n        await this.TasksList.push(task);        \n    }\n    function getTask(taskId){        \n        return TasksList[taskId];\n    }\n    function taskDone(id){\n        if(this.TasksList[id].getCheckList()==false){\n            this.TasksList[id].setCheckList();\n        }\n        else{\n            this.TasksList[id].unSetCheckList();\n        }\n            \n    }\n    function removeTask(id){\n        let newTask=[];        \n        for (let index=0;index<this.TasksList.length;index++){           \n            if(id!=index){\n                newTask.push(this.TasksList[index])                \n            }\n        }\n        this.TasksList=newTask;    \n    }\n    function updateTask(id,newTask){\n        this.TasksList[id]=newTask;                \n    }\n    function removeDone(){\n        let newTask=[];\n        console.log(\"removing done\")                \n        for (let index=0;index<this.TasksList.length;index++){           \n            if(this.TasksList[index].getCheckList()===false){\n                newTask.push(this.TasksList[index])                \n            }\n        }\n        \n        this.TasksList=newTask;    \n        console.log(this.TasksList);               \n    }\n\n    return {\n        title,\n        description,\n        TasksList,\n        addTask,        \n        getTask,\n        removeTask,\n        removeDone,\n        updateTask,\n        taskDone\n    }\n}\n\nmodule.exports=projectLocal;\n\n//# sourceURL=webpack://todolist/./src/projects.js?");
+
+/***/ }),
+
+/***/ "./src/taskForm.js":
+/*!*************************!*\
+  !*** ./src/taskForm.js ***!
+  \*************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("let listProjectservice=__webpack_require__(/*! ./listService */ \"./src/listService.js\")\nlet taskListService=listProjectservice();\nlet projectsLocal = __webpack_require__(/*! ./projects */ \"./src/projects.js\")\nlet localProject=projectsLocal();\n\nconst PubSub = __webpack_require__(/*! pubsub-js */ \"./node_modules/pubsub-js/src/pubsub.js\");\n\nfunction componentProject(serviceList, mode, id){        \n    console.log(serviceList)\n    console.log(mode)\n    console.log(id)\n        \n\n\n    let localTitle=\" \";\n    let localDescription=\" \";\n\n    let contentElement=document.getElementById('tasksColumn') ;\n    contentElement.innerHTML=\"\";\n    contentElement.className=\"projectsColClass\";\n\n    let formulary=document.createElement('div'); \n    formulary.className=\"formsFormulary\"\n\n    let title= document.createElement('div'); \n    title.className=\"titleName\"\n    let snippetLocal = document.createTextNode(\"New Project Form\");\n    title.appendChild(snippetLocal);    \n    formulary.appendChild(title);\n\n\n    let labelTitle= document.createElement('label');\n    labelTitle.className=\"labelsForms\";\n    labelTitle.HTMLfor=\"inputTitle\";\n    labelTitle.id=\"labelProjectTitle\";\n    labelTitle.innerText=\"Title:\";\n    let inputTitle2= document.createElement('input'); \n    inputTitle2.id=\"inputTitle\";\n    inputTitle2.className=\"inputForms\";\n    console.log(serviceList.listService[1])\n    if(mode==1){\n        inputTitle2.value=serviceList.listService[id].title;\n    }\n    formulary.appendChild(labelTitle);\n    formulary.appendChild(inputTitle2);\n\n\n\n    let labelDescription= document.createElement('label');\n    labelDescription.className=\"labelsForms\";\n    labelDescription.HTMLfor=\"inputDecription\";\n    labelDescription.id=\"labelProjectDescription\";\n    labelDescription.innerText=\"Description:\";\n    let inputDescription= document.createElement('textarea'); \n    inputDescription.id=\"inputDescription\";\n    inputDescription.className=\"inputForms\";\n    inputDescription.rows=\"50\";\n    inputDescription.cols=\"auto\";\n    if(mode==1){\n        inputDescription.value=serviceList.listService[id].description;\n    }\n    formulary.appendChild(labelDescription);\n    formulary.appendChild(inputDescription);\n    \n\n    let separation= document.createElement('div'); \n    separation.className=\"separation\"\n    formulary.appendChild(separation);\n\n\n    let buttonsForms=document.createElement('div'); \n    let buttonCancel=document.createElement('button'); \n    buttonsForms.className=\"projectButtons\";\n\n    buttonCancel.id=\"cancelProject\";\n    buttonCancel.innerHTML=\"CANCEL\";\n    let buttonOK=document.createElement('button'); \n    if(mode==0){\n        buttonOK.innerHTML = \"ADD\";\n    }\n    else{\n        buttonOK.innerHTML = \"UPDATE\";\n    }\n    buttonOK.id=\"okProject\";\n    buttonsForms.appendChild(buttonCancel);\n    buttonsForms.appendChild(buttonOK);\n\n    formulary.appendChild(buttonsForms);\n    contentElement.appendChild(formulary);\n    //adding listeners\n    let buttonProjectCancel=document.getElementById(\"cancelProject\");\n    buttonProjectCancel.addEventListener(\"click\",buttonFunction);\n    let buttonProjectOK=document.getElementById(\"okProject\");\n    buttonProjectOK.addEventListener(\"click\",buttonFunction);\n    \n    let inputTitleId=document.getElementById(\"inputTitle\");\n    let inputDescriptionId=document.getElementById(\"inputDescription\");\n\n    inputTitleId.addEventListener(\"change\",textChange);\n    inputDescriptionId.addEventListener(\"change\",textChange);\n\n    function textChange(x){\n        console.log(x);\n        if(x.srcElement.id==\"inputTitle\")\n        {\n            localTitle=x.srcElement.value;\n        }\n        else{\n            localDescription=x.srcElement.value;\n        }\n    }\n\n    \n    function buttonFunction(x){\n        console.log(x.srcElement.id);\n\n        if(x.srcElement.id==\"cancelProject\"){\n            contentElement.innerHTML=\" \";            \n            PubSub.publish('projectUpdates', 'nothing');\n            return (serviceList)\n        }\n        else{\n            console.log(\"sending\");\n            contentElement.innerHTML=\" \";\n            if(mode==0){\n                \n                localProject.title=localTitle;\n                localProject.description=localDescription;\n                console.log(localProject)\n                serviceList.addProject(localProject);\n            }\n            else{\n                if(localTitle!=\" \"){\n                    serviceList.listService[id].title= localTitle;\n                }\n                if (localDescription!=\" \") {\n                    serviceList.listService[id].description= localDescription;  \n                }    \n                \n            }\n            PubSub.publish('projectUpdates', 'NewProject!');\n            return (serviceList)\n            \n        }\n    }\n \n}\n\nmodule.exports= {componentProject};\n\n//# sourceURL=webpack://todolist/./src/projectForm.js?");
+eval("let listProjectservice=__webpack_require__(/*! ./listService */ \"./src/listService.js\")\nlet taskListService=listProjectservice();\nlet projectsLocal = __webpack_require__(/*! ./projects */ \"./src/projects.js\")\nlet taskMod = __webpack_require__(/*! ./tasks */ \"./src/tasks.js\")\n\n\nfunction componentTaskForm(serviceList,projectId,mode,taskId){        \n    let localtask;\n    if(mode==0){\n        localtask=taskMod();\n    }\n    else{\n        localtask=serviceList.listService[projectId].getTask(taskId);\n    }\n    \n\n    let contentElement=document.getElementById('taskForm') ;\n    let formularyTask=document.createElement('div'); \n    formularyTask.className=\"formsTask\";\n    let title= document.createElement('div'); \n    title.className=\"titleTaskName\"\n    let textTask = document.createTextNode(\"New task\");\n    title.appendChild(textTask);    \n    title.style.cssText=\"background:transparent;display:flex;\";\n    formularyTask.appendChild(title);\n\n    let labelTaskTitle= document.createElement('label');\n    labelTaskTitle.className=\"labelsForms\";\n    labelTaskTitle.HTMLfor=\"inputTaskTitle2\";\n    labelTaskTitle.id=\"labelTaskTitle\";\n    labelTaskTitle.innerText=\"Title:\";\n    let inputTaskTitle2= document.createElement('input'); \n    inputTaskTitle2.id=\"inputTaskTitle\";\n    inputTaskTitle2.className=\"inputForms\";\n    if(mode==1){//if editing default value\n        inputTaskTitle2.value=localtask.title;\n    }\n    formularyTask.appendChild(labelTaskTitle);\n    formularyTask.appendChild(inputTaskTitle2);\n\n\n    let labelTaskDescription= document.createElement('label');\n    labelTaskDescription.className=\"labelsForms\";\n    labelTaskDescription.HTMLfor=\"inputTaskDescription\";\n    labelTaskDescription.id=\"labelTaskDescription\";\n    labelTaskDescription.innerText=\"Description:\";\n    let inputTaskDescription= document.createElement('textarea'); \n    inputTaskDescription.id=\"inputTaskDescription\";\n    inputTaskDescription.className=\"inputForms\";\n    inputTaskDescription.rows=\"10\";\n    inputTaskDescription.cols=\"auto\";\n    if(mode==1){\n        inputTaskDescription.value=localtask.description;\n    }\n    formularyTask.appendChild(labelTaskDescription);\n    formularyTask.appendChild(inputTaskDescription);\n\n\n    let labelTaskDueDate= document.createElement('label');\n    labelTaskDueDate.className=\"labelsForms\";\n    labelTaskDueDate.HTMLfor=\"labelTaskDueDate\";\n    labelTaskDueDate.id=\"labelTaskDueDate\";\n    labelTaskDueDate.innerText=\"DueDate:\";\n    let inputTaskDueDate= document.createElement('input'); \n    inputTaskDueDate.id=\"inputTaskDueDate\";\n    inputTaskDueDate.type=\"date\";\n    if(mode==1){\n        inputTaskDueDate.value=localtask.dueDate;\n    }\n    formularyTask.appendChild(labelTaskDueDate);\n    formularyTask.appendChild(inputTaskDueDate);\n\n    let labelTaskPriority= document.createElement('label');\n    labelTaskPriority.className=\"labelsForms\";\n    labelTaskPriority.HTMLfor=\"inputTaskPriority\";\n    labelTaskPriority.id=\"labelTaskPriority\";\n    labelTaskPriority.innerText=\"Priority:\";\n\n    let inputTaskPriority= document.createElement('select'); \n    inputTaskPriority.id=\"inputTaskPriority\";    \n    let priorityLow = document.createElement('option'); \n    priorityLow.value=\"low\";\n    priorityLow.text=\"low\";\n    let priorityMedium = document.createElement('option'); \n    priorityMedium.value=\"medium\";\n    priorityMedium.text=\"medium\";\n    let priorityHigh = document.createElement('option'); \n    priorityHigh.value=\"high\";\n    priorityHigh.text=\"high\";\n    \n    if(mode==1){\n        inputTaskPriority.value=localtask.priority;\n    }\n\n\n    inputTaskPriority.appendChild(priorityLow);\n    inputTaskPriority.appendChild(priorityMedium);\n    inputTaskPriority.appendChild(priorityHigh);\n    \n    formularyTask.appendChild(labelTaskPriority);\n    formularyTask.appendChild(inputTaskPriority);\n\n\n\n\n\n\n    let buttonsForms=document.createElement('div'); \n    let buttonCancel=document.createElement('button'); \n    buttonsForms.className=\"taskButtons\";\n\n    buttonCancel.id=\"cancelTask\";\n    buttonCancel.innerHTML=\"CANCEL\";\n    let buttonOK=document.createElement('button'); \n    buttonOK.innerHTML = \"OK\";\n    /*if(mode==0){\n        buttonOK.innerHTML = \"ADD\";\n    }\n    else{\n        buttonOK.innerHTML = \"UPDATE\";\n    }*/\n    buttonOK.id=\"okTask\";\n    buttonsForms.appendChild(buttonCancel);\n    buttonsForms.appendChild(buttonOK);\n\n    formularyTask.appendChild(buttonsForms);\n\n    contentElement.appendChild(formularyTask);\n\n\n    let inputTaskTitleId=document.getElementById(\"inputTaskTitle\");\n    let inputTaskDescriptionId=document.getElementById(\"inputTaskDescription\");\n    //listeners\n\n    let buttonTaskCancel=document.getElementById(\"cancelTask\");\n    buttonTaskCancel.addEventListener(\"click\",buttonFunctionTask);\n    let buttonTaskOK=document.getElementById(\"okTask\");\n    buttonTaskOK.addEventListener(\"click\",buttonFunctionTask);\n    \n\n\n\n    inputTaskTitleId.addEventListener(\"change\",textChange);\n    inputTaskDescriptionId.addEventListener(\"change\",textChange);\n    inputTaskDueDate.addEventListener(\"change\",textChange);\n    inputTaskPriority.addEventListener(\"change\",textChange);\n\n    function textChange(x){\n        console.log(x);\n        if(x.srcElement.id==\"inputTaskTitle\"){            \n            localtask.title=x.srcElement.value;\n        }\n        if(x.srcElement.id==\"inputTaskDescription\"){                \n                localtask.description=x.srcElement.value;\n                }\n        if(x.srcElement.id==\"inputTaskDueDate\"){                \n                localtask.dueDate= x.srcElement.value;\n            }    \n        if(x.srcElement.id==\"inputTaskPriority\"){   \n            console.log(x.srcElement.value)             ;\n            localtask.priority= x.srcElement.value;\n        }        \n        \n    }\n\n\n    function buttonFunctionTask(x){\n        localtask.checklist=false;\n        if(x.srcElement.id==\"cancelTask\"){\n            contentElement.innerHTML=\" \";                        \n            return \n        }\n        else{\n            console.log(\"sending\");   \n\n            if(mode==1){                \n                serviceList.listService[projectId].updateTask(taskId,localtask)\n            }\n            else{\n                serviceList.listService[projectId].addTask(localtask);\n            }            \n            let contentElementLocal=document.getElementById('taskForm');\n            contentElementLocal.innerHTML=\" \";\n            PubSub.publish('taskUpdate', 'NewTask!');\n        }\n    } \n}\n\nmodule.exports= {componentTaskForm};\n\n//# sourceURL=webpack://todolist/./src/taskForm.js?");
+
+/***/ }),
+
+/***/ "./src/tasks.js":
+/*!**********************!*\
+  !*** ./src/tasks.js ***!
+  \**********************/
+/***/ ((module) => {
+
+eval("\nconst task = function (Title,Description,DueDate,Priority,Note) {\n    let title=Title;\n    let description=Description;\n    let dueDate=DueDate;\n    let priority=Priority;\n    let note=Note;\n    let checklist=false;\n\n    const writeNote=function(note){\n        this.note=note;\n    }\n    const setCheckList=function (){\n        this.checklist=true;\n    }\n    const unSetCheckList=function (){\n        this.checklist=false;\n    }\n    const getCheckList=function (){\n        return  this.checklist;\n    }\n\n    return {\n        title,\n        description,\n        dueDate,\n        priority,\n        note,\n        checklist,\n        writeNote,\n        setCheckList,\n        unSetCheckList,\n        getCheckList\n    }\n}\n\nmodule.exports=task;\n    \n\n\n//# sourceURL=webpack://todolist/./src/tasks.js?");
 
 /***/ })
 
-},
-/******/ __webpack_require__ => { // webpackRuntimeModules
-/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["projects"], () => (__webpack_exec__("./src/projectForm.js")));
-/******/ var __webpack_exports__ = __webpack_require__.O();
-/******/ }
-]);
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			loaded: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/taskForm.js");
+/******/ 	
+/******/ })()
+;
