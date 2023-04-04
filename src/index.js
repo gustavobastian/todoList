@@ -70,12 +70,14 @@ async function All(){
     task.priority="high"
     task.dueDate= new Date().toISOString();
     task.description="Organize the notes."
+    task.checklist=false;
 
     let task2= taskMod();
     task2.title="two";
     task2.priority="low";
     task2.dueDate=new Date().toISOString();
     task2.description="Remove old tasks."
+    task2.checklist=true;
     list.addTask(task);
     list.addTask(task2);    
     

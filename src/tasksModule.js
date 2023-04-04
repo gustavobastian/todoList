@@ -37,6 +37,26 @@ function componentTasks(serviceList,projectId){
 
     
     let index=0;
+
+    let topButtonsTasks= document.createElement('div');          
+    topButtonsTasks.className="topButtonsTasks";
+
+    let buttonNewTask= document.createElement('div');          
+    buttonNewTask.id="buttonNewTask";        
+    buttonNewTask.className="newButton";
+    let textNewTask = document.createTextNode("New");        
+    buttonNewTask.appendChild(textNewTask);   
+    topButtonsTasks.appendChild(buttonNewTask);
+
+    let clearDone= document.createElement('div');          
+    clearDone.id="clearDone";        
+    clearDone.className="newButton";
+    let textClear = document.createTextNode("Clean");        
+    clearDone.appendChild(textClear);   
+    topButtonsTasks.appendChild(clearDone);
+
+    allTasks.appendChild(topButtonsTasks);
+
     serviceList.listService[projectId].TasksList.forEach(element => {
         console.log(element);
         let cardTask= document.createElement('div');         
@@ -96,6 +116,12 @@ function componentTasks(serviceList,projectId){
         let check = document.createElement("input")
         check.type="checkbox";
         check.id="taskCheck_"+index;
+
+        if(element.checklist===true)
+        {
+            check.checked=true;
+        }
+
         checkdone.appendChild(labelCheckTitle);  
         checkdone.appendChild(check);  
         buttonsTasks.appendChild(checkdone);  
@@ -106,7 +132,9 @@ function componentTasks(serviceList,projectId){
         index++;
     });
 
+
     contentElement.appendChild(allTasks);
+    
 }
 
 module.exports= {componentTasks};
