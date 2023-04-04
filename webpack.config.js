@@ -6,9 +6,7 @@ module.exports = {
   mode:'development', 
   entry: {
     index:{
-      import:'./src/index.js',
-      dependOn: 'listService',
-      dependOn:'projectsModule',      
+      import:'./src/index.js',            
       dependOn: 'projects',      
       },
     tasks:{
@@ -24,7 +22,7 @@ module.exports = {
       },
     projectsForm:{
       import:'./src/projectForm.js',
-      dependOn: 'tasks',      
+      dependOn: 'projects',      
       },
     listService:{
       import: './src/listService.js',

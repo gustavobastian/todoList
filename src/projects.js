@@ -1,26 +1,14 @@
-const { taskList } = require("./projectsModule");
 
-const projects = function (Title,Description) {
-    let title=Title;
-    let description=Description;
+const projectLocal = function () {
+    let title;
+    let description;
     let TasksList = [];
-    
     async function addTask(task){
         await this.TasksList.push(task);        
     }
-    
-    function findIndex(task){
-        for (let index=0;index<this.TasksList.size;index++)
-            if(task==TasksList[index])
-                {return index;}
-        
-        return -1;        
-    }
-
     function getTask(taskId){        
         return TasksList[taskId];
     }
-
     function taskDone(id){
         if(this.TasksList[id].getCheckList()==false){
             this.TasksList[id].setCheckList();
@@ -30,7 +18,6 @@ const projects = function (Title,Description) {
         }
             
     }
-
     function removeTask(id){
         let newTask=[];        
         for (let index=0;index<this.TasksList.length;index++){           
@@ -40,13 +27,9 @@ const projects = function (Title,Description) {
         }
         this.TasksList=newTask;    
     }
-
-
     function updateTask(id,newTask){
         this.TasksList[id]=newTask;                
     }
-
-
     function removeDone(){
         let newTask=[];
         console.log("removing done")                
@@ -64,8 +47,7 @@ const projects = function (Title,Description) {
         title,
         description,
         TasksList,
-        addTask,
-        findIndex,
+        addTask,        
         getTask,
         removeTask,
         removeDone,
@@ -74,4 +56,4 @@ const projects = function (Title,Description) {
     }
 }
 
-module.exports=projects;
+module.exports=projectLocal;

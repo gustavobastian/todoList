@@ -1,14 +1,12 @@
 let listProjectservice=require('./listService')
 let taskListService=listProjectservice();
 let projectsLocal = require('./projects')
+let localProject=projectsLocal();
 
-
+const PubSub = require('pubsub-js');
 
 function componentProject(serviceList, mode, id){        
-    console.log(serviceList)
-    console.log(mode)
-    console.log(id)
-
+   
     let localTitle=" ";
     let localDescription=" ";
 
@@ -120,10 +118,11 @@ function componentProject(serviceList, mode, id){
             console.log("sending");
             contentElement.innerHTML=" ";
             if(mode==0){
-                let newProject=projectsLocal();
-                newProject.title=localTitle;
-                newProject.description=localDescription;
-                serviceList.addProject(newProject);
+                
+                localProject.title=localTitle;
+                localProject.description=localDescription;
+                console.log(localProject)
+                serviceList.addProject(localProject);
             }
             else{
                 if(localTitle!=" "){
