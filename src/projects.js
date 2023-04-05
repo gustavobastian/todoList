@@ -42,13 +42,18 @@ const projectLocal = function () {
         this.TasksList=newTask;    
         console.log(this.TasksList);               
     }
-
+    function isValid(){
+        if(this.title==null || this.title==" "){return false;}
+        if(this.description==null || this.description== " "){return false;}
+        return true;
+    }
     return {
         title,
         description,
         TasksList,
         addTask,        
         getTask,
+        isValid,
         removeTask,
         removeDone,
         updateTask,

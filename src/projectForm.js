@@ -114,13 +114,20 @@ function componentProject(serviceList, mode, id){
         }
         else{
             console.log("sending");
-            contentElement.innerHTML=" ";
+            
             if(mode==0){
                 
                 localProject.title=localTitle;
                 localProject.description=localDescription;
                 console.log(localProject)
-                serviceList.addProject(localProject);
+                if(localProject.isValid()==false){
+                    window.alert("Some Data missed, please complete the form");                    
+                }
+                else{
+                    serviceList.addProject(localProject);
+                    PubSub.publish('projectUpdates', 'NewProject!');
+                    contentElement.innerHTML=" ";
+                }
             }
             else{
                 if(localTitle!=" "){
@@ -129,9 +136,10 @@ function componentProject(serviceList, mode, id){
                 if (localDescription!=" ") {
                     serviceList.listService[id].description= localDescription;  
                 }    
-                
+                PubSub.publish('projectUpdates', 'NewProject!');
+                contentElement.innerHTML=" ";
             }
-            PubSub.publish('projectUpdates', 'NewProject!');
+            
             return (serviceList)
             
         }
