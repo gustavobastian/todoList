@@ -23,7 +23,8 @@ function componentProject(serviceList, mode, id){
     title.appendChild(snippetLocal);    
     formulary.appendChild(title);
 
-
+    let rowTitle= document.createElement('div');
+    rowTitle.className="innerRow";
     let labelTitle= document.createElement('label');
     labelTitle.className="labelsForms";
     labelTitle.HTMLfor="inputTitle";
@@ -36,8 +37,10 @@ function componentProject(serviceList, mode, id){
     if(mode==1){
         inputTitle2.value=serviceList.listService[id].title;
     }
-    formulary.appendChild(labelTitle);
-    formulary.appendChild(inputTitle2);
+    rowTitle.appendChild(labelTitle);
+    rowTitle.appendChild(inputTitle2);
+
+    formulary.appendChild(rowTitle);
 
 
 
@@ -57,11 +60,6 @@ function componentProject(serviceList, mode, id){
     formulary.appendChild(labelDescription);
     formulary.appendChild(inputDescription);
     
-
-    let separation= document.createElement('div'); 
-    separation.className="separation"
-    formulary.appendChild(separation);
-
 
     let buttonsForms=document.createElement('div'); 
     let buttonCancel=document.createElement('button'); 

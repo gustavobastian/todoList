@@ -16,7 +16,7 @@ body{
     height: 50px;
     background: rgb(244, 248, 225);
     color: blue;
-    font-size: 45px;
+    font-size: max(2.5vw,20px);
 }
 .dinamicContent{
     display: grid;    
@@ -44,14 +44,16 @@ body{
     display: flex;
     flex-direction: column;  
     align-items: center;  
-    
+    height: auto;
     background: rgb(61, 61, 116);
+    overflow: scroll;
 }
 .titleName{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 24px;    
+    
+    font-size: max(1.5vw,20px);
     font-weight: bold;
     background: transparent;
     color:rgb(248, 239, 113);
@@ -80,7 +82,7 @@ body{
     background: transparent;
     width: 100%;
     border-radius: 5px;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-bottom: 0;
     margin-bottom: 0;
 }
@@ -115,7 +117,14 @@ body{
     text-align: center;
 }
 
-
+.innerRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: transparent;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 .formsFormulary{
     display:flex;
     flex-direction: column;
@@ -128,20 +137,14 @@ body{
     margin-top: 30px;
     border-radius: 10px;
 }
-.separation{
-    display:flex;
-    flex-direction: column;
-    width: 100%;
-    height: 400px;
-    background: transparent;
-}
+
 .labelsForms{
-    background-color:gold;
+    background-color:transparent;
     color: black;
     font-size: 18px;
+    font-weight: bold;
     width: 50%;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    
 }
 .inputForms{
     background-color: rgb(182, 182, 182);
@@ -156,7 +159,7 @@ body{
     background: gold;
     color:black;
     border-radius:15px;
-    height: 100px;
+    height: 30px;
     width: 100px;
     font-weight: bold;
     box-shadow: 0px 0px 15px 0px black;
@@ -168,17 +171,18 @@ body{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: auto;
     background: gray;
     text-align: center;
     box-shadow: 0px 0px 15px 0px black;
     margin-top: 30px;
-    border-radius: 10px;
+    overflow: scroll;
+
 }
 .titleProjectName{
     display:flex;
     flex-direction: row;
-    width: 90%;
+    width: 100%;
     text-align: left;
     color:black;
     background: rgb(139, 168, 96);
@@ -288,13 +292,18 @@ body{
     justify-content: space-around;
     align-items: center;
     background: gray;
-    width: 1000px;
+    width: 100%;
     font-size: 28px;
     color: black;
     border-style: solid;
     border-width: 2px;
     padding-top:10px;
     padding-bottom:10px;
+
+}
+.taskForm{
+    display:flex;
+    width: 100%;
 
 }
 .titleTaskName{
@@ -314,7 +323,7 @@ body{
     width: 100%;
     align-items: center;
     background-color: transparent;
-    justify-content: space-around;
+    justify-content: space-around;    
 }
 .inputTaskDueDate{ 
     background: transparent;

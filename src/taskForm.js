@@ -1,6 +1,5 @@
 let listProjectservice=require('./listService')
 let taskListService=listProjectservice();
-let projectsLocal = require('./projects')
 let taskMod = require('./tasks')
 
 
@@ -13,8 +12,11 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
         localtask=serviceList.listService[projectId].getTask(taskId);
     }
     
-
-    let contentElement=document.getElementById('taskForm') ;
+/*    let contentElementLocal=document.getElementById('allTasks');
+            contentElementLocal.innerHTML=" ";
+*/
+    let contentElement=document.getElementById('tasksColumn') ;
+    contentElement.innerHTML=" ";
     let formularyTask=document.createElement('div'); 
     formularyTask.className="formsTask";
     let title= document.createElement('div'); 
@@ -168,7 +170,7 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
         localtask.checklist=false;
         if(x.srcElement.id=="cancelTask"){
             contentElement.innerHTML=" ";                        
-            return 
+            PubSub.publish('taskUpdate', 'NewTask!');            
         }
         else{
             console.log("sending");   
@@ -178,9 +180,7 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
             }
             else{
                 serviceList.listService[projectId].addTask(localtask);
-            }            
-            let contentElementLocal=document.getElementById('taskForm');
-            contentElementLocal.innerHTML=" ";
+            }                      
             PubSub.publish('taskUpdate', 'NewTask!');
         }
     } 
