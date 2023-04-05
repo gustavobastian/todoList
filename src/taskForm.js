@@ -48,6 +48,7 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
     labelTaskDescription.innerText="Description:";
     let inputTaskDescription= document.createElement('textarea'); 
     inputTaskDescription.id="inputTaskDescription";
+    inputTaskDescription.required="true";
     inputTaskDescription.className="inputForms";
     inputTaskDescription.rows="10";
     inputTaskDescription.cols="auto";
@@ -114,13 +115,7 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
     buttonCancel.id="cancelTask";
     buttonCancel.innerHTML="CANCEL";
     let buttonOK=document.createElement('button'); 
-    buttonOK.innerHTML = "OK";
-    /*if(mode==0){
-        buttonOK.innerHTML = "ADD";
-    }
-    else{
-        buttonOK.innerHTML = "UPDATE";
-    }*/
+    buttonOK.innerHTML = "OK";    
     buttonOK.id="okTask";
     buttonsForms.appendChild(buttonCancel);
     buttonsForms.appendChild(buttonOK);
@@ -175,15 +170,24 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
         else{
             console.log("sending");   
 
-            if(mode==1){                
+            if(mode==1){   
+                if(localtask.isValid()!=true)             
+                { window.alert("some data missing")
+                    return;
+                }
                 serviceList.listService[projectId].updateTask(taskId,localtask)
             }
             else{
+                if(localtask.isValid()!=true)             
+                { window.alert("some data missing")
+                    return;
+                }                
                 serviceList.listService[projectId].addTask(localtask);
             }                      
             PubSub.publish('taskUpdate', 'NewTask!');
         }
     } 
+    
 }
 
 module.exports= {componentTaskForm};
