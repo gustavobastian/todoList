@@ -71,20 +71,24 @@ const listService = function () {
         return this.listService[id];
     }
 
-    function updateTask(projectId,taskId,localtask){
+    async function updateTask(projectId,taskId,localtask){
         let localProject=project();
         localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
         localProject.updateTask(taskId,localtask);
+        console.log(JSON.stringify(localProject));
         this.listService[projectId]=localProject;
-        return ;
+        await updateStorage();
+        return;
     }
 
-    function addTask(projectId,localtask){
+    async function addTask(projectId,localtask){
         let localProject=project();
         localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
         localProject.addTask(localtask);
+        console.log(JSON.stringify(localProject));
         this.listService[projectId]=localProject;
-        return ;
+        await updateStorage();
+        return;
     }
 
     function removeTask(projectId,taskId){
