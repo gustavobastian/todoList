@@ -25,11 +25,8 @@ const task = function (Title,Description,DueDate,Priority,Note) {
         console.log(this.description)
         if(this.title==null){            
             return false;}
-        if(this.description==null){return false;}
-        if(this.dueDate==null){return false;}
-        if(this.priority==null){return false;}
+        return !((this.description==null) || (this.dueDate==null) || (this.priority==null));        
         
-        return true;
     }
 
     return {
