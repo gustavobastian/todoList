@@ -40,9 +40,12 @@ const listService = function () {
         localStorage.setItem("listService",JSON.stringify(newlistService) );
     }
 
-    function addProject(project){
-        console.log("project:"+JSON.stringify(project))
-        this.listService.push(project);        
+    function addProject(projectP){
+        console.log("project:"+JSON.stringify(projectP))
+        let localProject=project();
+        localProject.title=projectP.title;
+        localProject.description=projectP.description;
+        this.listService.push(localProject);        
         localStorage.setItem("listService",JSON.stringify(listService) )
         nProjects++;
     }

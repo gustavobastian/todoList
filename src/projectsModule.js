@@ -123,6 +123,9 @@ function component(serviceList){
         if(response===true){
             taskList.removeProject(id);            
             component(taskList);
+            /**cleaning the main block(if the project erased was opened before) */
+            let contentElement=document.getElementById('tasksColumn') ;
+            contentElement.innerHTML="";
         }
         
     }
