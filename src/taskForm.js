@@ -5,8 +5,6 @@ let taskMod = require('./tasks')
 
 function componentTaskForm(serviceList,projectId,mode,taskId){    
     
-    
-    
     let localtask;
     if(mode==0){
         localtask=taskMod();
@@ -115,11 +113,6 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
     
     formularyTask.appendChild(labelTaskPriority);
     formularyTask.appendChild(inputTaskPriority);
-
-
-
-
-
 
     let buttonsForms=document.createElement('div'); 
     let buttonCancel=document.createElement('button'); 
