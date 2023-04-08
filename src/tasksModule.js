@@ -191,6 +191,7 @@ function componentTasks(serviceList,projectId){
         checkTick.addEventListener("change",function(){            
             console.log("checked:" + index2)
             serviceList.listService[projectId].taskDone(index2);
+            localStorage.setItem("listService",JSON.stringify(serviceList.listService) )
         });
         
     }

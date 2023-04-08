@@ -85,8 +85,12 @@ async function All(){
     return list;
     }
 async function GeneratingFirstListOfProjects(){
-    let project1= await All();    
-    localProjectList.addProject(project1);    
+    
+    
+    if((await localProjectList).nProjects==0){
+        let project1= await All();    
+        localProjectList.addProject(project1); 
+    }
     projects.component(localProjectList);
     return localProjectList;
 }
