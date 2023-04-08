@@ -12,8 +12,23 @@ let mySubscriber = function (msg, data) {
 const listService = function () {
     let listService=[];
     PubSub.subscribe('projectUpdates', mySubscriber);
+
+    
+
+    if (!localStorage.getItem("listService")) {
+        localStorage.setItem("listService","") 
+      } else {
+        let localList=JSON.parse(localStorage.getItem("listService"));
+        console.log(localList)
+        localList.forEach(element => {
+            listService.push(localList)
+        });
+        
+      }
+
     function addProject(project){
         this.listService.push(project);        
+        localStorage.setItem("listService",JSON.stringify(listService) )
     }
 
     function removeProject(id){
