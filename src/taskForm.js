@@ -12,9 +12,6 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
         localtask=serviceList.listService[projectId].getTask(taskId);
     }
     
-/*    let contentElementLocal=document.getElementById('allTasks');
-            contentElementLocal.innerHTML=" ";
-*/
     let contentElement=document.getElementById('tasksColumn') ;
     contentElement.innerHTML=" ";
     let formularyTask=document.createElement('div'); 
