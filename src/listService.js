@@ -30,6 +30,16 @@ const listService = function () {
       }
     }  
 
+    async function updateStorage(){
+        let newlistService=[];
+            for(let index=0;index<listService.length;index++){                
+                    newlistService.push(listService[index]);                
+            }
+        localStorage.removeItem("listService");
+        this.listService=newlistService;
+        localStorage.setItem("listService",JSON.stringify(newlistService) );
+    }
+
     function addProject(project){
         console.log("project:"+JSON.stringify(project))
         this.listService.push(project);        
@@ -50,17 +60,61 @@ const listService = function () {
                     newlistService.push(listService[index]);
                 }
             }
+            nProjects--;
             localStorage.removeItem("listService");
             this.listService=newlistService;
             localStorage.setItem("listService",JSON.stringify(newlistService) );
         }
     }
 
+    function getProject(id){
+        return this.listService[id];
+    }
+
+    function updateTask(projectId,taskId,localtask){
+        let localProject=project();
+        localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
+        localProject.updateTask(taskId,localtask);
+        this.listService[projectId]=localProject;
+        return ;
+    }
+
+    function addTask(projectId,localtask){
+        let localProject=project();
+        localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
+        localProject.addTask(localtask);
+        this.listService[projectId]=localProject;
+        return ;
+    }
+
+    function removeTask(projectId,taskId){
+        let localProject=project();
+        localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
+        localProject.removeTask(taskId);
+        this.listService[projectId]=localProject;
+        updateStorage();
+        return ;
+    }
+
+    function removeDone(projectId){
+        let localProject=project();
+        localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
+        localProject.removeDone();
+        this.listService[projectId]=localProject;
+        updateStorage();
+        return ;
+    }
 
     return {
         listService,
         nProjects,        
-        addProject,        
+        addProject, 
+        getProject,
+        removeTask,
+        removeDone,
+        addTask,
+        updateTask,
+        updateStorage,       
         removeProject
     };
 }   

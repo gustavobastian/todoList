@@ -87,7 +87,7 @@ async function All(){
 async function GeneratingFirstListOfProjects(){
     
     
-    if((await localProjectList).nProjects==0){
+    if((localProjectList).nProjects==0){
         let project1= await All();    
         localProjectList.addProject(project1); 
     }

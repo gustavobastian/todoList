@@ -160,7 +160,7 @@ function componentTasks(serviceList,projectId){
 
         let response=(confirm("are you shure?"));
         if(response===true){
-            serviceList.listService[projectId].removeDone();
+            serviceList.removeDone(projectId);
             componentTasks(serviceList,projectId);    
         }
     });
@@ -173,7 +173,7 @@ function componentTasks(serviceList,projectId){
 
             let response=(confirm("are you shure?"));
             if(response===true){
-                serviceList.listService[projectId].removeTask(index2);                     
+                serviceList.removeTask(projectId,index2);                     
                 refreshTasks();
             }
 
@@ -190,8 +190,9 @@ function componentTasks(serviceList,projectId){
         let checkTick=document.getElementById("taskCheck_"+index2)
         checkTick.addEventListener("change",function(){            
             console.log("checked:" + index2)
-            serviceList.listService[projectId].taskDone(index2);
-            localStorage.setItem("listService",JSON.stringify(serviceList.listService) )
+            console.log("value="+checkTick.checked)            
+            serviceList.listService[projectId].TasksList[index2].checklist=checkTick.checked;
+            serviceList.updateStorage();
         });
         
     }

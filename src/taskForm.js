@@ -3,13 +3,29 @@ let taskListService=listProjectservice();
 let taskMod = require('./tasks')
 
 
-function componentTaskForm(serviceList,projectId,mode,taskId){        
+function componentTaskForm(serviceList,projectId,mode,taskId){    
+    
+    
+    
     let localtask;
     if(mode==0){
         localtask=taskMod();
+       
     }
     else{
-        localtask=serviceList.listService[projectId].getTask(taskId);
+        console.log("editing task")
+        console.log("projectId "+projectId)
+        console.log("taskId "+ taskId)
+        
+        let d=JSON.parse(JSON.stringify((serviceList.listService[projectId]).TasksList[taskId]));//.TaskList[taskId])
+        localtask=taskMod();        
+        
+        console.log(d)
+        localtask.description=d.description;
+        localtask.checklist=d.checklist;
+        localtask.dueDate=d.dueDate;
+        localtask.title=d.title;
+        
     }
     
     let contentElement=document.getElementById('tasksColumn') ;
@@ -172,14 +188,18 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
                 { window.alert("some data missing")
                     return;
                 }
-                serviceList.listService[projectId].updateTask(taskId,localtask)
+                serviceList.updateTask(projectId,taskId,localtask)
+                console.log("updating Storage")
+                serviceList.updateStorage();
             }
             else{
                 if(localtask.isValid()!=true)             
                 { window.alert("some data missing")
                     return;
                 }                
-                serviceList.listService[projectId].addTask(localtask);
+                console.log("updating Storage 2")
+                serviceList.addTask(projectId,localtask);
+                serviceList.updateStorage();
             }                      
             PubSub.publish('taskUpdate', 'NewTask!');
         }
