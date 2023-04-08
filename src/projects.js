@@ -34,11 +34,10 @@ const projectLocal = function () {
     function removeDone(){
         let newTask=[];
         console.log("removing done")                
-        for (let index=0;index<this.TasksList.length;index++){           
-            if(this.TasksList[index].checklist==false){
-                newTask.push(this.TasksList[index])                
-            }
-        }
+        TasksList.forEach(element => {
+            if(element.checklist==false)
+                newTask.push(element)                
+        });
         
         this.TasksList=newTask;    
         console.log(this.TasksList);               
@@ -54,9 +53,13 @@ const projectLocal = function () {
     }
 
     function isValid(){
-        if(this.title==null || this.title==" "){return false;}
-        if(this.description==null || this.description== " "){return false;}
-        return true;
+        if(this.title==null || this.title==" " || this.description==null || this.description== " "){
+            return false;
+        }        
+        else{
+            return true;
+        }
+        
     }
     return {
         title,
