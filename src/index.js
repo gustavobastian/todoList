@@ -4,7 +4,7 @@ import './style.css';
 let taskMod = require('./tasks')
 let projects = require('./projectsModule')
 let projectsLocal = require('./projects')
-let listProjectservice=require('./listService')
+let listProjectservice = require('./listService')
 
 function component(){
     

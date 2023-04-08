@@ -37,7 +37,7 @@ const listService = function () {
         nProjects++;
     }
 
-    function removeProject(id){
+    async function removeProject(id){
         console.log("removing "+id)
         if (id<0 || id> listService.length)
         {
@@ -50,7 +50,9 @@ const listService = function () {
                     newlistService.push(listService[index]);
                 }
             }
+            localStorage.removeItem("listService");
             this.listService=newlistService;
+            localStorage.setItem("listService",JSON.stringify(newlistService) );
         }
     }
 
