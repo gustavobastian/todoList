@@ -88,7 +88,7 @@ const listService = function () {
         let localProject=project();
         localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
         localProject.addTask(localtask);
-        console.log(JSON.stringify(localProject));
+        console.log(JSON.stringify(localProject.TasksList))
         this.listService[projectId]=localProject;
         updateStorage();        
     }
@@ -97,6 +97,7 @@ const listService = function () {
         let localProject=project();
         localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
         localProject.removeTask(taskId);
+        console.log(JSON.stringify(localProject.TasksList))
         this.listService[projectId]=localProject;
         updateStorage();        
     }
@@ -105,6 +106,7 @@ const listService = function () {
         let localProject=project();
         localProject.createProject(this.listService[projectId].title,this.listService[projectId].description,this.listService[projectId].TasksList);
         localProject.removeDone();
+        console.log(JSON.stringify(localProject.TasksList))
         this.listService[projectId]=localProject;
         updateStorage();        
     }

@@ -183,7 +183,7 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
                 }
                 serviceList.updateTask(projectId,taskId,localtask)
                 console.log("updating Storage")
-                serviceList.updateStorage();
+                
             }
             else{
                 if(localtask.isValid()!=true)             
@@ -192,7 +192,7 @@ function componentTaskForm(serviceList,projectId,mode,taskId){
                 }                
                 console.log("updating Storage 2")
                 serviceList.addTask(projectId,localtask);
-                serviceList.updateStorage();
+                
             }                      
             PubSub.publish('taskUpdate', 'NewTask!');
         }
