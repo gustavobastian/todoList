@@ -11,7 +11,7 @@ function component(){
 
     let contentElement=document.createElement('div') 
     let navBar= document.createElement('div'); 
-    let snippetLocal = document.createTextNode("My Project Monitor");
+    let snippetLocal = document.createTextNode("My ToDo List");
     navBar.appendChild(snippetLocal);
     navBar.className="header";
     contentElement.appendChild(navBar);
